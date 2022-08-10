@@ -47,3 +47,13 @@ class CyclePlayer(Player):
             return self.moves[0]
 
 
+class HumanPlayer(Player):
+    def move(self):
+        # while loop to prevent crashing from invalid input
+        while True:
+            human_move = input("Play either rock, paper or scissors :-"
+                               ).lower()
+            if human_move in self.moves:
+                return human_move
+            elif human_move == "quit":
+                return quit()
