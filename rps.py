@@ -57,3 +57,33 @@ class HumanPlayer(Player):
                 return human_move
             elif human_move == "quit":
                 return quit()
+
+def beats(one, two):
+    return ((one == 'rock' and two == 'scissors') or
+            (one == 'scissors' and two == 'paper') or
+            (one == 'paper' and two == 'rock'))
+
+
+class Game:
+    def __init__(self, p1, p2):
+        self.p1 = p1
+        self.p2 = p2
+        self.p1_score = 0
+        self.p2_score = 0
+
+    def play_round(self):
+        move1 = self.p1.move()
+        move2 = self.p2.move()
+        print(f"Player 1: {move1}  Player 2: {move2}")
+        if beats(move1, move2):
+            self.p1_score += 1
+            print("Player One wins this Round")
+        elif move1 == move2:
+            print("Couldn't agree on a winner")
+        else:
+            self.p2_score += 1
+            print("Player Two wins this Round")
+        print("Player one -- " + str(self.p1_score) + " & "
+              "Player Two -- " + str(self.p2_score))
+        self.p1.learn(move1, move2)
+        self.p2.learn(move2, move1)
