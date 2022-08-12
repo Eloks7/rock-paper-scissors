@@ -87,3 +87,40 @@ class Game:
               "Player Two -- " + str(self.p2_score))
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
+    
+    def play_game(self):
+        print(Fore.RED + "Game start!\n")
+        print(Style.RESET_ALL)
+        print("This is a 3 Round game\n")
+        print("Type 'quit' when you want to quit\n")
+        for round in range(3):
+            print(f"Round {round + 1}:")
+            self.play_round()
+            if self.p1_score - self.p2_score == "2":
+                return print(Fore.RED + "FATALITY!!! Player 1 has won already")
+            elif self.p2_score - self.p1_score == "2":
+                return print(Fore.RED + "FATALITY!!! Player 2 has already won")
+        print(Style.RESET_ALL)
+        # Checking for winner
+        if self.p1_score > self.p2_score:
+            print("Player 1 (" + str(self.p1_score) + ") : ("
+                  + str(self.p2_score) + ") Player 2\n")
+            print(Fore.GREEN + "Player 1 Champion")
+            print(Style.RESET_ALL)
+        elif self.p2_score > self.p1_score:
+            print("Player 1 (" + str(self.p1_score) + ") : ("
+                  + str(self.p2_score) + ") Player 2\n")
+            print(Fore.GREEN + "Player 2 Champion")
+            print(Style.RESET_ALL)
+        else:
+            print("Player 1 (" + str(self.p1_score) + ") : ("
+                  + str(self.p2_score) + ") Player 2\n")
+            print(Fore.YELLOW + "No Victor, No Vanquished")
+            print(Style.RESET_ALL)
+
+        print("Game over!")
+
+
+if __name__ == '__main__':
+    game = Game(HumanPlayer(), ReflectPlayer())
+    game.play_game()
